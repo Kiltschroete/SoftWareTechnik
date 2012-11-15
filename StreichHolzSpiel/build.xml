@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     01.11.2012 17:33:41                                                        
+
+     HalloWelt    
+     BuildFile fuer HalloWelt
+                   
+     Yvonne Wolf                                                                
+     ====================================================================== -->
+<project basedir="." name="TestBuild" default="clean">
+    <description>
+         HalloWelt bauen, starten und aufraumen
+    </description>
+
+	<property name="src" value="src"/>
+	<property name="build" value="build"/>
+		
+    <target name="Ordner">
+		<mkdir dir="${build}"/> 
+		<echo>Ordner erstellt!</echo>
+	</target>
+
+	<target name="compile" depends="Ordner">
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="flase" debug="on"/>
+    	<echo>Programm gebaut!</echo>
+    </target>
+
+	<target name="run" depends="compile">
+		<java classpath="${build}" classname="Hallo" fork="true"/>
+	</target>
+	
+	<target name="clean" depends="run">
+		<delete dir="${build}"/>
+		<echo>Ordner geloescht!</echo>
+	</target>
+	
+</project>
